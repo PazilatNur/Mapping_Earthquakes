@@ -1,6 +1,44 @@
 console.log("working");
 
-let map = L.map('mapid').setView([30, 30], 2);
+let map = L.map('mapid').setView([37.5, -122.5], 10);
+
+// cities.forEach(city=>{
+//   console.log(city);
+//   let marker=L.marker(city.location)
+//   .bindPopup("<h2>"+city.city +","+ city.state + "</h2><hr><h3> Population: " + city.population.toLocaleString()  + "</h3>" ).addTo(map);
+// })
+
+let line=[];
+cities.forEach(city=>{
+  console.log(city);
+  L.circleMarker(city.location ,{
+    radius: city.population/100000
+  })
+  .bindPopup("<h2>"+city.city +","+ city.state + "</h2><hr><h3> Population: " + city.population.toLocaleString()  + "</h3>" ).addTo(map);
+  line.push(city.location);
+})
+
+console.log(line);
+
+L.polyline(line,{
+  color: "blue"
+}).addTo(map);
+
+
+
+
+
+// let marker=L.marker([34.0522, -118.2437]).addTo(map);
+// L.circleMarker([34.0522, -118.2437], {
+//   radius:100});
+
+// L.circleMarker([34.0522, -118.2437], {
+//   radius: 100,
+//   color: "red",
+//   fillColor:"#ffffa1"
+// }).addTo(map);
+// api.mapbox.com/styles/v1/{id}/tiles
+
 
 let sanFranAirport =
 {"type":"FeatureCollection","features":[{
